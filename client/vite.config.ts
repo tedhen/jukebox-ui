@@ -27,8 +27,7 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true,
     },
     define: {
-      'import.meta.env.INPUT_NODE': JSON.stringify(env.INPUT_NODE || 'input'),
-      'import.meta.env.VITE_FEATURE_SEARCH_AS_DEFAULT': JSON.stringify(env.VITE_FEATURE_SEARCH_AS_DEFAULT)
+      'import.meta.env.INPUT_NODE': JSON.stringify(env.INPUT_NODE || 'input')
     }
   }
 })
