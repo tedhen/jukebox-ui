@@ -1,10 +1,12 @@
 // client/src/components/TheNavbar.vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import ThemeToggle from './ThemeToggle.vue'
+import { featureFlags } from '@/utils/featureFlags'
 
 const isMenuOpen = ref(false)
+const route = useRoute()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -12,6 +14,13 @@ const toggleMenu = () => {
 
 const closeMenu = () => {
   isMenuOpen.value = false
+}
+
+const isActiveRoute = (path: string) => {
+  if (path === '/' && route.path === '/search' && featureFlags.searchAsDefault) {
+    return true;
+  }
+  return route.path === path;
 }
 
 const navItems = [
@@ -38,15 +47,15 @@ const navItems = [
         <div class="hidden md:flex md:items-center">
           <div class="ml-10 flex items-baseline space-x-4">
             <RouterLink
-              v-for="item in navItems"
-              :key="item.path"
-              :to="item.path"
-              class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              :class="{ 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white': $route.path === item.path }"
-              @click="closeMenu"
-            >
-              {{ item.name }}
-            </RouterLink>
+            v-for="item in navItems"
+            :key="item.path"
+            :to="item.path"
+            class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            :class="{ 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white': isActiveRoute(item.path) }"
+            @click="closeMenu"
+          >
+            {{ item.name }}
+          </RouterLink>
           </div>
           <div class="ml-4">
             <ThemeToggle data-cy="theme-toggle" />

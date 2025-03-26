@@ -3,6 +3,7 @@
 model_endpoint: <MODEL_ENDPOINT>
 input_node: input
 model_name: jukebox
+search_as_default: false
 
 # naming convention for images should take the form 
 # SCENARIO-VERSION 

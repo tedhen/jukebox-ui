@@ -40,6 +40,7 @@ const apiProxy = createProxyMiddleware({
     logLevel: 'debug',
     router: {
         'refdata/song': 'http://0.0.0.0:3000',
+        'refdata/config.js': 'http://0.0.0.0:3000',
         'refdata/world.geojson': 'http://0.0.0.0:3000'
     },
     onProxyReq: (proxyReq, req, res) => {
@@ -71,6 +72,18 @@ app.get('/refdata/songs', (req, res) => {
 
 app.get('/refdata/world.geojson', (req, res) => {
     res.sendFile(path.join(__dirname, 'low-res.geo.json'));
+  });
+
+// Generate runtime config
+app.get('/refdata/config.js', (req, res) => {
+    res.set('Content-Type', 'application/javascript');
+    res.send(`
+      // Runtime configuration - Generated: ${new Date().toISOString()}
+      window.JUKEBOX_CONFIG = {
+        FEATURE_SEARCH_AS_DEFAULT: ${process.env.FEATURE_SEARCH_AS_DEFAULT === 'true'},
+        // Add other runtime configs here
+      };
+    `);
   });
 
 app.get('*', (req, res) => {

@@ -49,6 +49,8 @@ spec:
               value: '{{ .Values.input_node }}'
             - name: PORT
               value: '3000'
+            - name: FEATURE_SEARCH_AS_DEFAULT
+              value: '{{ .Values.search_as_default }}'
           securityContext:
             capabilities:
               drop:

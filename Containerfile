@@ -7,6 +7,7 @@ RUN npm ci
 # build client side
 COPY client/ ./client/
 COPY *.config.js ./
+
 RUN npm run build
 
 # Production stage
