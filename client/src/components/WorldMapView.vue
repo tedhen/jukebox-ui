@@ -149,9 +149,9 @@ const addColorLegend = () => {
   let legendContent = ''
   
   // Add color gradient steps
-  const steps = 8
-  for (let i = 0; i < steps; i++) {
-    const value = i / (steps - 1)
+  const steps = [1, 0.8, 0.6, 0.4, 0.2, 0.1, 0.05, 0.01, 0];
+  for (let i = 0; i < steps.length; i++) {
+    const value = steps[i]
     legendContent += `<div class="color-step" style="background-color: ${getColor(value)}; text-align: center"> ${Math.ceil(value*100)}% </div>`
   }
   
@@ -170,13 +170,14 @@ const addColorLegend = () => {
 
 // Color function - returns color based on probability
 const getColor = (probability: number) => {
-  return probability > 0.8 ? '#800026' :
-         probability > 0.6 ? '#BD0026' :
-         probability > 0.4 ? '#E31A1C' :
-         probability > 0.2 ? '#FC4E2A' :
-         probability > 0.1 ? '#FD8D3C' :
-         probability > 0.05 ? '#FEB24C' :
-         probability > 0.01 ? '#FED976' :
+  return probability >= 1 ? '#3B000A' :
+         probability >= 0.8 ? '#800026' :
+         probability >= 0.6 ? '#BD0026' :
+         probability >= 0.4 ? '#E31A1C' :
+         probability >= 0.2 ? '#FC4E2A' :
+         probability >= 0.1 ? '#FD8D3C' :
+         probability >= 0.05 ? '#FEB24C' :
+         probability >= 0.01 ? '#FED976' :
                           '#FFEDA0'
 }
 </script>
