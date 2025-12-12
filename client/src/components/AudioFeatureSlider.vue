@@ -21,7 +21,7 @@ const emit = defineEmits<{
 const featureDescriptions: Record<string, string> = {
   acousticness: "A confidence measure of whether the track is acoustic. A value of 1.0 represents high confidence the track is acoustic.",
   danceability: "How suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.",
-  duration_ms: "The duration of the track in milliseconds.",
+  duration_ms: "The duration of the track in seconds.",
   energy: "A measure representing intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale.",
   instrumentalness: "Predicts whether a track contains no vocals. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 represent instrumental tracks.",
   is_explicit: "Whether or not the track contains explicit lyrics (true = 1, false = 0).",
